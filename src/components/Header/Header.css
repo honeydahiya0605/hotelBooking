@@ -1,0 +1,46 @@
+.header {
+  width: auto;
+  height: auto;
+  display: flex;
+  background-color: #061424;
+  color: white;
+  position: relative;
+}
+
+.logo img {
+  width: 8rem;
+  height: 8rem;
+}
+.menu {
+  display: flex;
+  padding: auto;
+  cursor: pointer;
+}
+.menu .list {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 4rem;
+  padding-right: 1px;
+  font-size: larger;
+}
+.offers {
+  text-align: center;
+  justify-content: center;
+}
+/* .menu .list .nav {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  list-style: none;
+
+} */
+.login {
+  height: auto;
+  width: auto;
+  font-size: large;
+}
+.button {
+  color: #061424;
+}
