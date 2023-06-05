@@ -112,6 +112,7 @@ const HotelBookingPage = () => {
             </div>
           </section>
         </main>
+        {/* without searching validation */}
         <section className="featured-hotels-section">
           <h2>Featured Hotels</h2>
           <div className="hotel-list">
@@ -129,6 +130,34 @@ const HotelBookingPage = () => {
             </div>
           </div>
         </section>
+        {/* with searching validation  */}
+        {/* <section className="featured-hotels-section">
+          <h2>Featured Hotels</h2>
+          <div className="hotel-list">
+            {filteredHotels.length > 0 ? (
+              filteredHotels.map((hotel) => (
+                <div className="hotel-card" key={hotel.id}>
+                  <img src={hotel.image} alt={hotel.name} />
+                  <h3>{hotel.name}</h3>
+                  <p>{hotel.description}</p>
+                  <p>
+                    Pricing: Standard Room - ${hotel.pricing.standardRoomPrice},
+                    Deluxe Room - ${hotel.pricing.deluxeRoomPrice}
+                  </p>
+                  <p>Room Types: {hotel.roomTypes.join(", ")}</p>
+                  <p>
+                    Availability: {hotel.availability.startDate.toDateString()}{" "}
+                    to {hotel.availability.endDate.toDateString()}
+                  </p>
+                  <p>{hotel.amenities}</p>
+                  <button onClick={() => handleBookNow(hotel)}>Book Now</button>
+                </div>
+              ))
+            ) : (
+              <p>No hotels found. Please refine your search criteria.</p>
+            )}
+          </div>
+        </section> */}
       </main>
       <footer>
         <p>&copy; 2023 Hotel Booking Website. All rights reserved.</p>
