@@ -1,17 +1,20 @@
-import React from "react";
-// import Header from "./components/Header/Header";
-// import SignUpForm from "./components/SignUp/SignUp";
-// import LoginForm from "./components/Login/Login";
-import HotelBookingPage from "./components/Home/Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import LoginPage from "../src/components/Login/Login";
+import SignUpPage from "../src/components/SignUp/SignUp";
+import HotelBookingPage from "../src/components/Home/Home";
+import Header from "./components/Header/Header";
 
 const App = () => {
   return (
-    <div>
-      {/* <SignUpForm /> */}
-      {/* <LoginForm /> */}
-      <HotelBookingPage />
-      {/* <Header /> */}
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HotelBookingPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signup" component={SignUpPage} />
+      </Switch>
+    </Router>
   );
 };
 

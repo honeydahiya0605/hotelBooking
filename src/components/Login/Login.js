@@ -7,15 +7,43 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    const updatedErrors = {};
+
+    if (!formData.email) {
+      updatedErrors.email = "Email is required.";
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      updatedErrors.password = "Password is required.";
+      isValid = false;
+    }
+
+    setErrors(updatedErrors);
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Reset the form
-    setFormData({ email: "", password: "" });
+
+    if (validateForm()) {
+      console.log(formData);
+      // Reset the form
+      setFormData({ email: "", password: "" });
+      setErrors({ email: "", password: "" });
+    }
   };
 
   return (
@@ -31,6 +59,7 @@ const LoginForm = () => {
           required
           className="input"
         />
+        {errors.email && <span className="error">{errors.email}</span>}
       </div>
       <div className="inputContainer">
         <label className="label">Password</label>
@@ -42,6 +71,7 @@ const LoginForm = () => {
           required
           className="input"
         />
+        {errors.password && <span className="error">{errors.password}</span>}
       </div>
       <button type="submit" className="button">
         Login
