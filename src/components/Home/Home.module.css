@@ -1,0 +1,270 @@
+body {
+  background-image: url("../../images/image1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hotel-booking-page {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+.search {
+  margin-bottom: 20px;
+}
+.searchbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-left: 34rem;
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  gap: 5px;
+  width: 343px;
+  height: 40px;
+}
+
+.input-group .form-select {
+  padding: 0.75rem;
+  display: flex;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+  width: 343px;
+  height: 40px;
+}
+.input-group .form-select option {
+  padding: 0.5rem;
+}
+
+.input-group .form-select option[selected] {
+  font-weight: bold;
+}
+
+.search-form input {
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
+.featured-hotels-section {
+  margin-bottom: 20px;
+}
+
+.hotel-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  text-align: center;
+}
+
+.hotel-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.hotel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-card img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.hotel-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.hotel-card p {
+  margin-bottom: 10px;
+}
+
+.hotel-card button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hotel-card button:hover {
+  background-color: #0056b3;
+}
+
+input[type="number"],
+textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-success :hover {
+  background-color: #218838;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  font-size: 14px;
+  color: #777;
+}
+
+.form-select {
+  display: flex;
+  width: 200px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.input-group #date {
+  width: 200px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.input-group .form-select:focus,
+.input-group #date:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group .form-select option {
+  padding: 0.5rem;
+}
+
+.input-group .form-select option[selected] {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.loading {
+  text-align: center;
+  font-style: italic;
+  color: white;
+}
+p {
+  color: white;
+  padding-bottom: 72px;
+}
+h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+p {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.location {
+  font-style: italic;
+  color: #888;
+}

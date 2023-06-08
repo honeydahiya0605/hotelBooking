@@ -1,0 +1,47 @@
+.hotelCard {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hotelName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hotelLocation {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.hotelRating {
+  font-size: 14px;
+  color: #888888;
+  margin-bottom: 15px;
+}
+
+.editButton,
+.deleteButton {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color: #0056b3;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #b72b3e;
+}

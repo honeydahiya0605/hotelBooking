@@ -1,142 +1,232 @@
 import React, { useState } from "react";
-import "./SignUp.css";
+import classes from "./SignUp.module.css";
 
 const SignUpForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    otp: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [mobileError, setMobileError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-    otp: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    setNameError("");
   };
 
-  const validateForm = () => {
-    let isValid = true;
-    const updatedErrors = {};
-
-    if (!formData.name) {
-      updatedErrors.name = "Name is required.";
-      isValid = false;
-    }
-
-    if (!formData.email) {
-      updatedErrors.email = "Email is required.";
-      isValid = false;
-    }
-
-    if (!formData.password) {
-      updatedErrors.password = "Password is required.";
-      isValid = false;
-    }
-
-    if (!formData.otp) {
-      updatedErrors.otp = "OTP is required.";
-      isValid = false;
-    }
-
-    setErrors(updatedErrors);
-    return isValid;
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError("");
   };
 
-  const sendOTP = () => {
-    console.log("Sending OTP via SMS or email...");
+  const handleMobileChange = (e) => {
+    setMobile(e.target.value);
+    setMobileError("");
   };
 
-  const handleSubmit = (e) => {
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError("");
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setConfirmPasswordError("");
+  };
+
+  const validateName = () => {
+    if (!name) {
+      setNameError("Name is required.");
+      return false;
+    }
+    return true;
+  };
+
+  const validateEmail = () => {
+    if (!email) {
+      setEmailError("Email is required.");
+      return false;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError("Invalid email format.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const validateMobile = () => {
+    if (!mobile) {
+      setMobileError("Mobile is required.");
+      return false;
+    }
+
+    const mobilePattern = /^\d{10}$/;
+    if (!mobilePattern.test(mobile)) {
+      setMobileError("Invalid mobile format.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const validatePassword = () => {
+    if (!password) {
+      setPasswordError("Password is required.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long.");
+      return false;
+    }
+
+    // const specialCharsPattern = /[!@#$%^&*(),.?":{}|<>]/;
+    // if (!specialCharsPattern.test(password)) {
+    //   setPasswordError("Password must contain at least one special character.");
+    //   return false;
+    // }
+
+    // return true;
+  };
+
+  const validateConfirmPassword = () => {
+    if (!confirmPassword) {
+      setConfirmPasswordError("Confirm password is required.");
+      return false;
+    }
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      const sendOTP = () => {
-        const apiUrl = "https://hotelbookings.com/send-otp";
-        fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            phoneNumber: formData.phoneNumber,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("OTP sent successfully!");
-          })
-          .catch((error) => {
-            console.error("Error sending OTP:", error);
-          });
-      };
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isMobileValid = validateMobile();
+    const isPasswordValid = validatePassword();
+    const isConfirmPasswordValid = validateConfirmPassword();
 
-      sendOTP();
+    if (
+      isNameValid &&
+      isEmailValid &&
+      isMobileValid &&
+      isPasswordValid &&
+      isConfirmPasswordValid
+    ) {
+      try {
+        const response = await fetch(
+          "https://hotel-app-le9o.onrender.com/api/auth/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              mobile,
+              password,
+            }),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
 
-      // Reset the form
-      setFormData({ name: "", email: "", password: "", otp: "" });
-      setErrors({ name: "", email: "", password: "", otp: "" });
+        // Reset the form
+        setName("");
+        setEmail("");
+        setMobile("");
+        setPassword("");
+        setConfirmPassword("");
+        setNameError("");
+        setEmailError("");
+        setMobileError("");
+        setPasswordError("");
+        setConfirmPasswordError("");
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registration</h2>
-      <div>
-        <label>Name</label>
+    <form onSubmit={handleSubmit} className={classes.form}>
+      <h2 className={classes.heading}>Sign Up</h2>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Name</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
+          value={name}
+          onChange={handleNameChange}
           required
+          className={classes.input}
         />
-        {errors.name && <span className="error">{errors.name}</span>}
+        {nameError && <span className={classes.error}>{nameError}</span>}
       </div>
-      <div>
-        <label>Email</label>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Email</label>
         <input
           type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={handleEmailChange}
           required
+          className={classes.input}
         />
-        {errors.email && <span className="error">{errors.email}</span>}
+        {emailError && <span className={classes.error}>{emailError}</span>}
       </div>
-      <div>
-        <label>Password</label>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Mobile</label>
+        <input
+          type="tel"
+          value={mobile}
+          onChange={handleMobileChange}
+          required
+          className={classes.input}
+        />
+        {mobileError && <span className={classes.error}>{mobileError}</span>}
+      </div>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Password</label>
         <input
           type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={handlePasswordChange}
           required
+          className={classes.input}
         />
-        {errors.password && <span className="error">{errors.password}</span>}
+        {passwordError && (
+          <span className={classes.error}>{passwordError}</span>
+        )}
       </div>
-      <div>
-        <label>OTP</label>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Confirm Password</label>
         <input
-          type="text"
-          name="otp"
-          value={formData.otp}
-          onChange={handleChange}
+          type="password"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
           required
+          className={classes.input}
         />
-        {errors.otp && <span className="error">{errors.otp}</span>}
+        {confirmPasswordError && (
+          <span className={classes.error}>{confirmPasswordError}</span>
+        )}
       </div>
-      <button type="button" onClick={sendOTP}>
-        Send OTP
+      <button type="submit" className={classes.button}>
+        Register
       </button>
-      <button type="submit">Register</button>
     </form>
   );
 };

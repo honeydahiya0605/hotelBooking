@@ -1,37 +1,37 @@
 import React, { useState } from "react";
-import "./Login.css";
+import classes from "./Login.module.css";
+import HotelBookingPage from "../Home/Home";
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError("");
+  };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError("");
   };
 
   const validateForm = () => {
     let isValid = true;
-    const updatedErrors = {};
 
-    if (!formData.email) {
-      updatedErrors.email = "Email is required.";
+    if (!email) {
+      setEmailError("Email is required.");
       isValid = false;
     }
 
-    if (!formData.password) {
-      updatedErrors.password = "Password is required.";
+    if (!password) {
+      setPasswordError("Password is required.");
       isValid = false;
     }
 
-    setErrors(updatedErrors);
     return isValid;
   };
 
@@ -39,41 +39,49 @@ const LoginForm = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log(formData);
+      console.log("Email:", email);
+      console.log("Password:", password);
       // Reset the form
-      setFormData({ email: "", password: "" });
-      setErrors({ email: "", password: "" });
+      setIsLoggedIn(true);
+      setEmail("");
+      setPassword("");
+      setEmailError("");
+      setPasswordError("");
     }
   };
 
+  if (isLoggedIn) {
+    return <HotelBookingPage />;
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <h2 className="heading">Login</h2>
-      <div className="inputContainer">
-        <label className="label">Email</label>
+    <form onSubmit={handleSubmit} className={classes.form}>
+      <h2 className={classes.heading}>Login</h2>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Email</label>
         <input
           type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={handleEmailChange}
           required
-          className="input"
+          className={classes.input}
         />
-        {errors.email && <span className="error">{errors.email}</span>}
+        {emailError && <span className={classes.error}>{emailError}</span>}
       </div>
-      <div className="inputContainer">
-        <label className="label">Password</label>
+      <div className={classes.inputContainer}>
+        <label className={classes.label}>Password</label>
         <input
           type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={handlePasswordChange}
           required
-          className="input"
+          className={classes.input}
         />
-        {errors.password && <span className="error">{errors.password}</span>}
+        {passwordError && (
+          <span className={classes.error}>{passwordError}</span>
+        )}
       </div>
-      <button type="submit" className="button">
+      <button type="submit" className={classes.button}>
         Login
       </button>
     </form>

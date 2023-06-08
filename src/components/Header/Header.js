@@ -1,34 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./Header.css";
+import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ onLoginClick, onSignupClick }) => {
   return (
-    <header className="header">
-      <nav className="navbar">
-        <Link to="/#" className="logo">
-          Hotel Booking
-        </Link>
-        <div className="nav-links">
-          <Link to="/#" className="nav-link">
-            Hotels
-          </Link>
-          <Link to="/#" className="nav-link">
-            Destinations
-          </Link>
-          <Link to="/#" className="nav-link">
-            Contact
-          </Link>
-        </div>
-
-        <Link to="/login" className="login-btn">
-          Login
-        </Link>
-        <Link to="/signup" className="signup-btn">
-          Sign Up
-        </Link>
-      </nav>
-    </header>
+    <div className={classes.main}>
+      <div className={classes.logo}>
+        <h3>BookMyHotel</h3>
+      </div>
+      <div className={classes.buttons}>
+        <button onClick={onLoginClick}>Login</button>
+        <button onClick={onSignupClick}>Sign Up</button>
+      </div>
+    </div>
   );
 };
 
